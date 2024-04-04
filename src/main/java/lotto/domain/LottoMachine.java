@@ -21,20 +21,21 @@ public class LottoMachine {
     }
 
     public List<Lotto> issue(int money) {
-        validateMoney(money);
-
+        List<Lotto> lottos = generateAutoLottos(money);
+        validateLottosNotEmpty(lottos);
         return generateAutoLottos(money);
     }
 
-    private void validateMoney(int money) {
-        if (money < lottoPrice) {
-            throw new IllegalArgumentException("로또를 한장도 구매할 수 없습니다");
+    private void validateLottosNotEmpty(Collection<Lotto> lottos) {
+        if (lottos.isEmpty()) {
+            throw new IllegalArgumentException("로또는 최소 하나 구매해야 합니다");
         }
     }
 
     public List<Lotto> issue(int money, Collection<Lotto> lottos) {
         List<Lotto> autoLottos = generateAutoLottos(calculateBalance(money, lottos));
         autoLottos.addAll(0, lottos);
+        validateLottosNotEmpty(autoLottos);
         return autoLottos;
     }
 

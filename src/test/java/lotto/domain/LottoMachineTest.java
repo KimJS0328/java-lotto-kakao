@@ -33,8 +33,12 @@ public class LottoMachineTest {
     void 로또를_한장도_구매할_수_없다면_예외를_던진다() {
         LottoMachine machine = new LottoMachine(1000);
 
-        assertThatThrownBy(() -> machine.issue(500))
-            .isInstanceOf(RuntimeException.class);
+        assertAll(
+            () -> assertThatThrownBy(() -> machine.issue(500))
+                .isInstanceOf(RuntimeException.class),
+            () -> assertThatThrownBy(() -> machine.issue(999, List.of()))
+                .isInstanceOf(RuntimeException.class)
+        );
     }
 
     @ParameterizedTest

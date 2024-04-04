@@ -32,7 +32,9 @@ public class View {
     }
 
     public List<List<Integer>> promptManualLottos(int count) {
-        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        if (count > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        }
         return Stream.generate(this::scanCsvIntegerList)
             .limit(count)
             .collect(Collectors.toList());
