@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import lotto.domain.Lotto;
 import lotto.domain.Prize;
@@ -21,6 +23,22 @@ public class View {
         return scanner.nextInt();
     }
 
+    public int promptManualCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int count = scanner.nextInt();
+        if (count < 0) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 음수일 수 없습니다");
+        }
+        return count;
+    }
+
+    public List<List<Integer>> promptManualLottos(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        return Stream.generate(this::scanCsvIntegerList)
+            .limit(count)
+            .collect(Collectors.toList());
+    }
+
     public void printLotto(List<Lotto> lotto) {
         System.out.printf("%d개를 구매했습니다.\n", lotto.size());
         lotto.forEach(this::printLotto);
@@ -35,6 +53,10 @@ public class View {
 
     public List<Integer> promptWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
+        return scanCsvIntegerList();
+    }
+
+    private List<Integer> scanCsvIntegerList() {
         return Arrays.stream(nextNotBlankLine().split(","))
             .map(String::trim)
             .map(Integer::parseInt)
