@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -48,7 +49,10 @@ public class LottoMachineTest {
 
         List<Lotto> issuedLottos = lottoMachine.issue(size * 1000 + 999, lottos);
 
-        assertThat(issuedLottos).hasSize(size);
+        assertAll(
+            () -> assertThat(issuedLottos).hasSize(size),
+            () -> assertThat(issuedLottos).containsAll(lottos)
+        );
     }
 
     @Test
