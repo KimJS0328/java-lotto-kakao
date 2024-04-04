@@ -33,7 +33,7 @@ public class LottoMachine {
     }
 
     public List<Lotto> issue(int money, Collection<Lotto> lottos) {
-        List<Lotto> autoLottos =  generateAutoLottos(calculateBalance(money, lottos));
+        List<Lotto> autoLottos = generateAutoLottos(calculateBalance(money, lottos));
         autoLottos.addAll(0, lottos);
         return autoLottos;
     }
