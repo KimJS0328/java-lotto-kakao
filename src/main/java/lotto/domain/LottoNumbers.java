@@ -62,6 +62,7 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return numbers.stream()
+            .sorted()
             .map(Object::toString)
             .collect(Collectors.joining(", "));
     }
