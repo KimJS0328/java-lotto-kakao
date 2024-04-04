@@ -36,7 +36,7 @@ public class Controller {
             .map(lotto -> new Lotto(lotto))
             .collect(Collectors.toList());
         List<Lotto> lotto = lottoMachine.issue(expense, manualLottos);
-        view.printLotto(lotto);
+        view.printLotto(lotto, manualCount);
         return lotto;
     }
 

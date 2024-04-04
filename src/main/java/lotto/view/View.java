@@ -40,8 +40,8 @@ public class View {
             .collect(Collectors.toList());
     }
 
-    public void printLotto(List<Lotto> lotto) {
-        System.out.printf("%d개를 구매했습니다.\n", lotto.size());
+    public void printLotto(List<Lotto> lotto, int manualCount) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualCount, lotto.size() - manualCount);
         lotto.forEach(this::printLotto);
         System.out.println();
     }
