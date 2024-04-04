@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lotto.domain.LottoResult;
 import lotto.domain.Lotto;
@@ -29,7 +30,12 @@ public class Controller {
 
     private List<Lotto> buyLotto() {
         int expense = view.promptExpense();
-        List<Lotto> lotto = lottoMachine.issue(expense);
+        int manualCount = view.promptManualCount();
+        List<Lotto> manualLottos = view.promptManualLottos(manualCount)
+            .stream()
+            .map(lotto -> new Lotto(lotto))
+            .collect(Collectors.toList());
+        List<Lotto> lotto = lottoMachine.issue(expense, manualLottos);
         view.printLotto(lotto);
         return lotto;
     }
