@@ -41,10 +41,6 @@ public class LottoNumbers {
         }
     }
 
-    public int size() {
-        return numbers.size();
-    }
-
     public int countMatch(LottoNumbers lottoNumbers) {
         return lottoNumbers.countMatch(numbers);
     }
