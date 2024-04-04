@@ -4,6 +4,7 @@ import static lotto.domain.Lotto.*;
 import static lotto.domain.LottoNumbers.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -22,15 +23,33 @@ public class LottoMachine {
     public List<Lotto> issue(int money) {
         validateMoney(money);
 
-        return Stream.generate(this::issue)
-            .limit(money / lottoPrice)
-            .collect(Collectors.toList());
+        return generateAutoLottos(money);
     }
 
     private void validateMoney(int money) {
         if (money < lottoPrice) {
             throw new IllegalArgumentException("로또를 한장도 구매할 수 없습니다");
         }
+    }
+
+    public List<Lotto> issue(int money, Collection<Lotto> lottos) {
+        List<Lotto> autoLottos =  generateAutoLottos(calculateBalance(money, lottos));
+        autoLottos.addAll(0, lottos);
+        return autoLottos;
+    }
+
+    private List<Lotto> generateAutoLottos(int balance) {
+        return Stream.generate(this::issue)
+            .limit(balance / lottoPrice)
+            .collect(Collectors.toList());
+    }
+
+    private int calculateBalance(int money, Collection<Lotto> lottos) {
+        int balance = money - lottos.size() * lottoPrice;
+        if (balance < 0) {
+            throw new IllegalArgumentException("주어진 금액으로 구매할 수 없습니다");
+        }
+        return balance;
     }
 
     private Lotto issue() {
