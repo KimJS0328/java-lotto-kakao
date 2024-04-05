@@ -13,38 +13,19 @@ import java.util.stream.Stream;
 public class LottoMachine {
 
     private final Random random;
-    private final int lottoPrice;
 
-    public LottoMachine(int lottoPrice) {
+    public LottoMachine() {
         this.random = new Random();
-        this.lottoPrice = lottoPrice;
     }
 
-    private void validateLottosNotEmpty(Collection<Lotto> lottos) {
-        if (lottos.isEmpty()) {
-            throw new IllegalArgumentException("로또는 최소 하나 구매해야 합니다");
-        }
+    public List<Lotto> issue(int amount) {
+        return generateAutoLottos(amount);
     }
 
-    public List<Lotto> issue(int money, Collection<Lotto> lottos) {
-        List<Lotto> autoLottos = generateAutoLottos(calculateBalance(money, lottos));
-        autoLottos.addAll(0, lottos);
-        validateLottosNotEmpty(autoLottos);
-        return autoLottos;
-    }
-
-    private List<Lotto> generateAutoLottos(int balance) {
+    private List<Lotto> generateAutoLottos(int amount) {
         return Stream.generate(this::issue)
-            .limit(balance / lottoPrice)
+            .limit(amount)
             .collect(Collectors.toList());
-    }
-
-    private int calculateBalance(int money, Collection<Lotto> lottos) {
-        int balance = money - lottos.size() * lottoPrice;
-        if (balance < 0) {
-            throw new IllegalArgumentException("주어진 금액으로 구매할 수 없습니다");
-        }
-        return balance;
     }
 
     private Lotto issue() {
@@ -63,9 +44,5 @@ public class LottoMachine {
             return poolSize;
         }
         return number;
-    }
-
-    public int getLottoPrice() {
-        return lottoPrice;
     }
 }

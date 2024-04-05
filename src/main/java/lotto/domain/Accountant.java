@@ -13,8 +13,15 @@ public class Accountant {
     }
 
     private void validate(int payment, int manualCount) {
-        if (payment < manualCount * price) {
-            throw new IllegalArgumentException("수동으로 구매할 로또 수보다 지불금액이 적습니다.");
+        if (payment < price) {
+            throw new IllegalArgumentException("적어도 하나의 로또는 구매할 수 있는 금액을 지급해야 합니다");
         }
+        if (payment < manualCount * price) {
+            throw new IllegalArgumentException("수동으로 구매할 로또 수보다 지불금액이 적습니다");
+        }
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
