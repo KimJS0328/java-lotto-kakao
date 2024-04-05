@@ -36,9 +36,10 @@ public class View {
     }
 
     public List<List<Integer>> promptManualLottos(int count) {
-        if (count > 0) {
-            System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        if (count <= 0) {
+            return List.of();
         }
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
         return Stream.generate(this::scanCsvIntegerList)
             .limit(count)
             .collect(Collectors.toList());
@@ -52,9 +53,17 @@ public class View {
 
     private void printLotto(Lotto lotto) {
         System.out.print("[");
-        System.out.print(lotto);
+        System.out.print(makeLottoCsvString(lotto));
         System.out.println("]");
     }
+
+    private String makeLottoCsvString(Lotto lotto) {
+        return lotto.getAscendingNumbers()
+            .stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(","));
+    }
+
 
     public List<Integer> promptWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
@@ -95,7 +104,11 @@ public class View {
     }
 
     public void printRewardRate(double rate) {
-        System.out.printf("총 수익률은 %.2f입니다.\n", rate);
+        System.out.printf("총 수익률은 %.2f입니다.", rate);
+        if (rate < 1.0) {
+            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+        System.out.println();
     }
 }
 
