@@ -19,7 +19,11 @@ public class View {
 
     public int promptExpense() {
         System.out.println("구입금액을 입력해주세요.");
-        return scanner.nextInt();
+        int expense = scanner.nextInt();
+        if (expense <= 0) {
+            throw new IllegalArgumentException("구입금액은 양수여야 합니다");
+        }
+        return expense;
     }
 
     public int promptManualCount() {

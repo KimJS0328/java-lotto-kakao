@@ -31,13 +31,17 @@ public class Controller {
     private List<Lotto> buyLotto() {
         int expense = view.promptExpense();
         int manualCount = view.promptManualCount();
-        List<Lotto> manualLottos = view.promptManualLottos(manualCount)
-            .stream()
-            .map(lotto -> new Lotto(lotto))
-            .collect(Collectors.toList());
+        List<Lotto> manualLottos = getManualLottos(manualCount);
         List<Lotto> lotto = lottoMachine.issue(expense, manualLottos);
         view.printLotto(lotto, manualCount);
         return lotto;
+    }
+
+    private List<Lotto> getManualLottos(int manualCount) {
+        return view.promptManualLottos(manualCount)
+            .stream()
+            .map(lotto -> new Lotto(lotto))
+            .collect(Collectors.toList());
     }
 
     private WinningLotto issueWinningLotto() {
