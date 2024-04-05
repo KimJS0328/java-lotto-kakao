@@ -20,12 +20,6 @@ public class LottoMachine {
         this.lottoPrice = lottoPrice;
     }
 
-    public List<Lotto> issue(int money) {
-        List<Lotto> lottos = generateAutoLottos(money);
-        validateLottosNotEmpty(lottos);
-        return generateAutoLottos(money);
-    }
-
     private void validateLottosNotEmpty(Collection<Lotto> lottos) {
         if (lottos.isEmpty()) {
             throw new IllegalArgumentException("로또는 최소 하나 구매해야 합니다");

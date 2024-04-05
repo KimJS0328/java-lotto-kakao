@@ -15,7 +15,7 @@ public class LottoMachineTest {
     void 로또_한장은_천원으로_여러_장을_구매할_수_있다() {
         LottoMachine machine = new LottoMachine(1000);
 
-        List<Lotto> lottos = machine.issue(5000);
+        List<Lotto> lottos = machine.issue(5000, List.of());
 
         assertThat(lottos).hasSize(5);
     }
@@ -24,7 +24,7 @@ public class LottoMachineTest {
     void 잔금은_무시한다() {
         LottoMachine machine = new LottoMachine(1000);
 
-        List<Lotto> lottos = machine.issue(5500);
+        List<Lotto> lottos = machine.issue(5500, List.of());
 
         assertThat(lottos).hasSize(5);
     }
@@ -34,7 +34,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine(1000);
 
         assertAll(
-            () -> assertThatThrownBy(() -> machine.issue(500))
+            () -> assertThatThrownBy(() -> machine.issue(500, List.of()))
                 .isInstanceOf(RuntimeException.class),
             () -> assertThatThrownBy(() -> machine.issue(999, List.of()))
                 .isInstanceOf(RuntimeException.class)
