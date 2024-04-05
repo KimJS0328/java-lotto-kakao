@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import static lotto.domain.Lotto.*;
-import static lotto.domain.LottoNumbers.*;
+import static lotto.domain.LottoNumber.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;

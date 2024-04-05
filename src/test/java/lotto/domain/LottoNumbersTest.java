@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumbersTest {
     @Test
-    void 로또_숫자는_1이상_45이하가_아니면_예외를_던진다() {
+    void 모든_숫자가_1이상_45이하가_아니면_예외를_던진다() {
         assertAll(
             () -> assertThatThrownBy(() -> new LottoNumbers(List.of(0, 2, 3, 4, 5, 6)))
                 .isInstanceOf(RuntimeException.class),
@@ -23,7 +23,7 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void 로또_숫자는_중복_숫자가_있으면_예외를_던진다() {
+    void 중복_숫자가_있으면_예외를_던진다() {
         assertAll(
             () -> assertThatThrownBy(() -> new LottoNumbers(List.of(2, 2, 3, 4, 5, 6)))
                 .isInstanceOf(RuntimeException.class),

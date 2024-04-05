@@ -32,7 +32,7 @@ public class Lotto {
         return numbers.containsAll(otherNumbers);
     }
 
-    public List<Integer> getAscendingNumbers() {
+    public List<LottoNumber> getAscendingNumbers() {
         return numbers.getAscendingNumbers();
     }
 }

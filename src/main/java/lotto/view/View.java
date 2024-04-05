@@ -61,7 +61,7 @@ public class View {
         return lotto.getAscendingNumbers()
             .stream()
             .map(String::valueOf)
-            .collect(Collectors.joining(","));
+            .collect(Collectors.joining(", "));
     }
 
 
