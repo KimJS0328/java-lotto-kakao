@@ -32,8 +32,7 @@ public class Lotto {
         return numbers.containsAll(otherNumbers);
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
+    public List<Integer> getAscendingNumbers() {
+        return numbers.getAscendingNumbers();
     }
 }

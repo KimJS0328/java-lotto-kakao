@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,11 +56,9 @@ public class LottoNumbers {
         return this.numbers.containsAll(lottoNumbers.numbers);
     }
 
-    @Override
-    public String toString() {
+    public List<Integer> getAscendingNumbers() {
         return numbers.stream()
             .sorted()
-            .map(Object::toString)
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.toList());
     }
 }
