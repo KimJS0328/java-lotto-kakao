@@ -64,7 +64,6 @@ public class View {
             .collect(Collectors.joining(", "));
     }
 
-
     public List<Integer> promptWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         return scanCsvIntegerList();
