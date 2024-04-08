@@ -1,9 +1,9 @@
 package lotto.domain;
 
-public class Accountant {
+public class LottoPrice {
     private final int price;
 
-    public Accountant(int price) {
+    public LottoPrice(int price) {
         this.price = price;
     }
 
