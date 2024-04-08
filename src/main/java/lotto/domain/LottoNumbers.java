@@ -42,8 +42,8 @@ public class LottoNumbers {
         return unionSet.size();
     }
 
-    public boolean containsAll(LottoNumbers lottoNumbers) {
-        return this.numbers.containsAll(lottoNumbers.numbers);
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getAscendingNumbers() {

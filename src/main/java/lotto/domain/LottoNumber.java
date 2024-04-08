@@ -4,7 +4,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAX_LOTTO_NUMBER];
-    Integer number;
+    private final Integer number;
 
     static {
         for (int i = 0; i < MAX_LOTTO_NUMBER; i++) {
@@ -36,5 +36,22 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber o) {
         return this.number - o.number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        LottoNumber that = (LottoNumber)o;
+
+        return number.equals(that.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return number.hashCode();
     }
 }

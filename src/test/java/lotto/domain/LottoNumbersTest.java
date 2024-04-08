@@ -45,23 +45,22 @@ public class LottoNumbersTest {
         assertThat(matchCount).isEqualTo(size);
     }
 
-    @Test
-    void 모든_숫자를_포함하면_true를_반환한다() {
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void 숫자를_포함하면_참을_반환한다(int number) {
         LottoNumbers numbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers numbers2 = new LottoNumbers(List.of(1, 2, 3, 4, 5));
 
-        boolean containsAll = numbers.containsAll(numbers2);
+        boolean contains = numbers.contains(LottoNumber.of(number));
 
-        assertThat(containsAll).isTrue();
+        assertThat(contains).isTrue();
     }
 
     @Test
-    void 모든_숫자를_포함하면_false를_반환한다() {
+    void 숫자를_포함하지_않으면_거짓을_반환한다() {
         LottoNumbers numbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers numbers2 = new LottoNumbers(List.of(1, 2, 3, 4, 7));
 
-        boolean containsAll = numbers.containsAll(numbers2);
+        boolean contains = numbers.contains(LottoNumber.of(7));
 
-        assertThat(containsAll).isFalse();
+        assertThat(contains).isFalse();
     }
 }

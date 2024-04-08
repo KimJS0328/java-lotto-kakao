@@ -33,14 +33,4 @@ public class LottoTest {
 
         assertThat(matchCount).isEqualTo(size);
     }
-
-    @Test
-    void 모든_숫자를_포함하는지_반환한다() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumbers numbers = new LottoNumbers(List.of(1, 2, 3, 4, 5));
-
-        boolean containsAll = lotto.containsAll(numbers);
-
-        assertThat(containsAll).isTrue();
-    }
 }
